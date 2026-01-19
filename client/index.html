@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Drawing Canvas</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-paint-brush"></i> Collaborative Canvas</h1>
+            <div class="status">
+                <span id="user-count">0 users online</span>
+                <div id="connection-status" class="connected">● Connected</div>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="tools-section">
+                    <h3><i class="fas fa-pencil-alt"></i> Tools</h3>
+                    <div class="tool-buttons">
+                        <button class="tool-btn active" data-tool="brush" title="Brush">
+                            <i class="fas fa-paint-brush"></i>
+                        </button>
+                        <button class="tool-btn" data-tool="eraser" title="Eraser">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                        <button class="tool-btn" data-tool="clear" title="Clear Canvas">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="colors-section">
+                    <h3><i class="fas fa-palette"></i> Colors</h3>
+                    <div class="color-palette">
+                        <div class="color-option" style="background-color: #FF6B6B;" data-color="#FF6B6B"></div>
+                        <div class="color-option" style="background-color: #4ECDC4;" data-color="#4ECDC4"></div>
+                        <div class="color-option" style="background-color: #FFD166;" data-color="#FFD166"></div>
+                        <div class="color-option" style="background-color: #06D6A0;" data-color="#06D6A0"></div>
+                        <div class="color-option" style="background-color: #118AB2;" data-color="#118AB2"></div>
+                        <div class="color-option" style="background-color: #073B4C;" data-color="#073B4C"></div>
+                        <div class="color-option" style="background-color: #7209B7;" data-color="#7209B7"></div>
+                        <div class="color-option" style="background-color: #F72585;" data-color="#F72585"></div>
+                        <div class="color-option" style="background-color: #3A0CA3;" data-color="#3A0CA3"></div>
+                        <div class="color-option" style="background-color: #4361EE;" data-color="#4361EE"></div>
+                        <div class="color-option" style="background-color: #4CC9F0;" data-color="#4CC9F0"></div>
+                        <div class="color-option" style="background-color: #000000;" data-color="#000000"></div>
+                    </div>
+                    <div class="custom-color">
+                        <input type="color" id="custom-color-picker" value="#FF6B6B">
+                        <label for="custom-color-picker">Custom Color</label>
+                    </div>
+                </div>
+                
+                <div class="brush-size">
+                    <h3><i class="fas fa-sliders-h"></i> Brush Size</h3>
+                    <div class="size-control">
+                        <input type="range" id="brush-size-slider" min="1" max="50" value="5">
+                        <span id="brush-size-value">5px</span>
+                    </div>
+                </div>
+                
+                <div class="actions-section">
+                    <h3><i class="fas fa-history"></i> Actions</h3>
+                    <div class="action-buttons">
+                        <button id="undo-btn" class="action-btn" title="Undo">
+                            <i class="fas fa-undo"></i> Undo
+                        </button>
+                        <button id="redo-btn" class="action-btn" title="Redo" disabled>
+                            <i class="fas fa-redo"></i> Redo
+                        </button>
+                        <button id="export-btn" class="action-btn" title="Export as PNG">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="users-section">
+                    <h3><i class="fas fa-users"></i> Online Users</h3>
+                    <div id="users-list">
+                        <div class="loading-users">Loading users...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="canvas-container">
+                <div class="canvas-wrapper">
+                    <canvas id="drawing-canvas"></canvas>
+                    <div id="remote-cursors"></div>
+                    <div class="canvas-overlay">
+                        <div class="instructions">
+                            <h3><i class="fas fa-info-circle"></i> How to Use</h3>
+                            <ul>
+                                <li>Click and drag to draw</li>
+                                <li>Multiple users can draw simultaneously</li>
+                                <li>See other users' cursors in real-time</li>
+                                <li>Use Undo to remove your last drawing</li>
+                            </ul>
+                        </div>
+                        <div id="fps-counter">FPS: --</div>
+                    </div>
+                </div>
+                <div class="canvas-stats">
+                    <div id="latency-display">Latency: -- ms</div>
+                    <div id="operation-count">Operations: 0</div>
+                    <div class="user-color-indicator">
+                        Your color: <span id="user-color-badge"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <p>Real-time Collaborative Drawing Canvas • Open multiple browser windows to test collaboration</p>
+        </footer>
+    </div>
+    
+    <div id="notification" class="notification"></div>
+    
+    <script src="main.js" type="module"></script>
+</body>
+</html>
